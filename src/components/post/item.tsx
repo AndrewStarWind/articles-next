@@ -10,6 +10,7 @@ export default function PostPage({ item }: PostPageProps): JSX.Element {
   // for image let's pretend there is an image for background in a good quality
   // and an srcset for each image is present as well
   // and it is optimized for web by Compress Now or any other optimization tool
+  // so i've just added priority=true here
   return (
     <>
       <header className="w-full relative ">

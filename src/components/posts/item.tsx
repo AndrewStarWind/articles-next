@@ -12,8 +12,9 @@ type PostPreviewProps = {
   data: Post;
 };
 
-// content may have some markup inside or could be JSX-element inside,
-// but we will keep simple
+// content may have some markup or could be JSX-element inside,
+// but we will keep simple, there are multiple ways to display rich-text,
+// it depends on rich-text markup format (HTML, JSONML, etc.)
 export default function PostPreview({
   data: { imagesrc, title, id, content },
 }: PostPreviewProps): JSX.Element {
