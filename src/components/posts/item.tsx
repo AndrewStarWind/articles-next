@@ -1,22 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type Article = {
+type Post = {
   imagesrc: string;
   title: string;
   content: string;
   id: string;
 };
 
-type ArticlePreviewProps = {
-  data: Article;
+type PostPreviewProps = {
+  data: Post;
 };
 
 // content may have some markup inside or could be JSX-element inside,
 // but we will keep simple
-export default function ArticlePreview({
+export default function PostPreview({
   data: { imagesrc, title, id, content },
-}: ArticlePreviewProps): JSX.Element {
+}: PostPreviewProps): JSX.Element {
   return (
     <article className="flex gap-4 flex-col md:flex-row md:basis-1/2 mb-8">
       <picture className="w-full h-48 md:h-full md:basis-1/2 relative">
@@ -27,7 +27,7 @@ export default function ArticlePreview({
         <div className="line-clamp-6">{content}</div>
         <Link
           className="ml-auto md:mr-auto md:ml-0 py-2 px-3 bg-indigo-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none w-32 text-center"
-          href={`article/${id}`}
+          href={`post/${id}`}
         >
           Read more...
         </Link>

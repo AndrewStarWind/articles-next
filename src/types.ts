@@ -1,18 +1,19 @@
-export type Article = {
+export type Post = {
   imagesrc: string;
   title: string;
   content: string;
   id: string;
 };
 
-export type ArticleData = {
-  data: Article[];
+export type PostData = {
+  data: Post[];
   next: boolean;
 };
 
 export type Comment = {
   id: string;
   text: string;
+  F;
   postId: string;
 };
 
@@ -29,12 +30,12 @@ export type ResultEntity<T> = {
 };
 
 export type CommentsResult = ResultQuery<Comment> | ResultError;
-export type ArticlePageResult = ResultEntity<ArticlePageData> | ResultError;
-export type ArticlesQueryResult = ArticleData | ResultError;
+export type PostPageResult = ResultEntity<PostPageData> | ResultError;
+export type PostsQueryResult = PostData | ResultError;
 
-type Results = CommentsResult | ArticlePageResult | ArticlesQueryResult;
+type Results = CommentsResult | PostPageResult | PostsQueryResult;
 
-export type ArticlePageData = Article & {
+export type PostPageData = Post & {
   comments: CommentsResult;
 };
 

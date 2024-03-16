@@ -1,5 +1,5 @@
 import { useRef, SyntheticEvent, useState } from "react";
-import postComment from "@/src/actions/postComment";
+import CommentsService from "@/src/api/comments";
 
 interface FormElements extends HTMLFormControlsCollection {
   comment: HTMLInputElement;
@@ -20,7 +20,7 @@ export default function CommentForm(props: {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await postComment({
+      await CommentsService.post({
         postId: props.postId,
         text: e.currentTarget.elements.comment.value,
       });

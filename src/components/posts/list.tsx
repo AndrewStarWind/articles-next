@@ -1,23 +1,18 @@
 "use client";
 import { useState } from "react";
-import ArticlePreview from "./item";
-import getPosts from "@/src/actions/loadPosts";
-import {
-  ArticleData,
-  Article,
-  isResultError,
-  ArticlesQueryResult,
-} from "../../types";
+import PostPreview from "./item";
+import PostService from "@/src/api/posts";
+import { PostData, Post, isResultError, PostsQueryResult } from "@/src/types";
 
 type PostsProps = {
-  initialArticles: ArticleData;
+  initialPosts: PostData;
 };
 
-export default function Posts({ initialArticles }: PostsProps): JSX.Element {
+export default function Posts({ initialPosts }: PostsProps): JSX.Element {
   const [page, setPage] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [posts, setPosts] = useState<Article[]>(initialArticles.data);
-  const [hasNext, setHasNext] = useState<boolean>(initialArticles.next);
+  const [posts, setPosts] = useState<Post[]>(initialPosts.data);
+  const [hasNext, setHasNext] = useState<boolean>(initialPosts.next);
   const [error, setError] = useState<string>();
 
   const loadMore = async () => {
@@ -26,15 +21,15 @@ export default function Posts({ initialArticles }: PostsProps): JSX.Element {
     // TODO: it would be a good idea to load data inside getStaticProps
     // for now just cache invalidation option is added inside fetch request
     // described: https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props
-    const articlesData: ArticlesQueryResult = await getPosts(page + 1);
+    const postsData: PostsQueryResult = await PostService.query(page + 1);
 
-    if (!isResultError(articlesData)) {
-      setPosts([...posts, ...articlesData.data]);
-      setHasNext(articlesData.next);
+    if (!isResultError(postsData)) {
+      setPosts([...posts, ...postsData.data]);
+      setHasNext(postsData.next);
       setPage(page + 1);
       setIsLoading(false);
     } else {
-      setError(articlesData.error);
+      setError(postsData.error);
     }
   };
 
@@ -49,8 +44,8 @@ export default function Posts({ initialArticles }: PostsProps): JSX.Element {
         <div className="flex flex-wrap">
           {posts &&
             posts.map(
-              (article: Article): JSX.Element => (
-                <ArticlePreview key={article.id} data={article} />
+              (article: Post): JSX.Element => (
+                <PostPreview key={article.id} data={article} />
               )
             )}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import { CommentsResult, isResultError, Comment } from "@/src/types";
 import { useState } from "react";
-import loadComments from "@/src/actions/loadComments";
+import CommentsService from "@/src/api/comments";
 
 import CommentForm from "./form";
 
@@ -25,7 +25,7 @@ export default function CommentsList({
   }
 
   const submitCallback = async () => {
-    const commentsData = await loadComments(postId);
+    const commentsData = await CommentsService.query(postId);
 
     if (isResultError(commentsData)) {
       setError(commentsData.error);

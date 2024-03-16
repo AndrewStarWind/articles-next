@@ -1,12 +1,12 @@
-import type { ArticlePageData } from "@/src/types";
+import type { PostPageData } from "@/src/types";
 import CommentsList from "@/src/components/comments/list";
 import Image from "next/image";
 
-type ArticlePageProps = {
-  item: ArticlePageData;
+type PostPageProps = {
+  item: PostPageData;
 };
 
-export default function ArticlePage({ item }: ArticlePageProps): JSX.Element {
+export default function PostPage({ item }: PostPageProps): JSX.Element {
   // for image let's pretend there is an image for background in a good quality
   // and an srcset for each image is present as well
   // and it is optimized for web by Compress Now or any other optimization tool
@@ -17,7 +17,13 @@ export default function ArticlePage({ item }: ArticlePageProps): JSX.Element {
           <h1 className="relative w-full mx-auto text-center p-12 md:p-32 z-10 text-2xl md:text-6xl font-bold">
             {item.title}
           </h1>
-          <Image fill src={item.imagesrc} alt={item.title} objectFit="cover" />
+          <Image
+            fill
+            priority
+            src={item.imagesrc}
+            alt={item.title}
+            objectFit="cover"
+          />
         </div>
       </header>
       <main>
