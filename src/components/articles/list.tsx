@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import ArticlePreview from "./item";
-import getPosts from "../../actions/loadPosts";
+import getPosts from "@/src/actions/loadPosts";
 import {
   ArticleData,
   Article,

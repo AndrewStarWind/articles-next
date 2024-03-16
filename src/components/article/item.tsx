@@ -1,5 +1,5 @@
 import type { ArticlePageData } from "@/src/types";
-import CommentsList from "../comments/list";
+import CommentsList from "@/src/components/comments/list";
 import Image from "next/image";
 
 type ArticlePageProps = {

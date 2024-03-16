@@ -1,4 +1,4 @@
-import { ArticlesQueryResult } from "../types";
+import { ArticlesQueryResult } from "@/src/types";
 
 const getPosts = async (page: number = 0): Promise<ArticlesQueryResult> => {
   try {

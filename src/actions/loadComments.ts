@@ -1,4 +1,4 @@
-import type { CommentsResult, Comment } from "../types";
+import type { CommentsResult, Comment } from "@/src/types";
 
 const getComments = async (articleId: string): Promise<CommentsResult> => {
   try {
