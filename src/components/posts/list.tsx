@@ -15,6 +15,9 @@ export default function Posts({ initialPosts }: PostsProps): JSX.Element {
   const [hasNext, setHasNext] = useState<boolean>(initialPosts.next);
   const [error, setError] = useState<string>();
 
+
+  // TODO: implement virtual scroll algotithm
+  // huge amout of loaded posts may slow down the page
   const loadMore = async () => {
     setIsLoading(true);
     const postsData: PostsQueryResult = await PostService.query(pageNumber + 1);
