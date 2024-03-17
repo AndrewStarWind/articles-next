@@ -21,7 +21,7 @@ export default function PostPage({ item }: PostPageProps): JSX.Element {
           <Image
             fill
             priority
-            src={item.imagesrc}
+            src={item.imageSrc}
             alt={item.title}
             objectFit="cover"
           />

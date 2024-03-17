@@ -1,12 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-type Post = {
-  imagesrc: string;
-  title: string;
-  content: string;
-  id: string;
-};
+import type { Post } from "@/src/types";
 
 type PostPreviewProps = {
   data: Post;
@@ -16,12 +10,12 @@ type PostPreviewProps = {
 // but we will keep simple, there are multiple ways to display rich-text,
 // it depends on rich-text markup format (HTML, JSONML, etc.)
 export default function PostPreview({
-  data: { imagesrc, title, id, content },
+  data: { imageSrc, title, id, content },
 }: PostPreviewProps): JSX.Element {
   return (
     <article className="flex gap-4 flex-col md:flex-row md:basis-1/2 mb-8">
       <picture className="w-full h-48 md:h-full md:basis-1/2 relative">
-        <Image fill src={imagesrc} alt="image" objectFit="cover" />
+        <Image fill src={imageSrc} alt="image" objectFit="cover" />
       </picture>
       <div className="md:basis-1/2 flex flex-col gap-2 mt-0 ml-0">
         <h3 className="text-lg font-bold truncate">{title}</h3>

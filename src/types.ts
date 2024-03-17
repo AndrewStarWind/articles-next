@@ -1,5 +1,5 @@
 export type Post = {
-  imagesrc: string;
+  imageSrc: string;
   title: string;
   content: string;
   id: string;
@@ -13,7 +13,6 @@ export type PostData = {
 export type Comment = {
   id: string;
   text: string;
-  F;
   postId: string;
 };
 

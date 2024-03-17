@@ -9,7 +9,7 @@ type PostsProps = {
 };
 
 export default function Posts({ initialPosts }: PostsProps): JSX.Element {
-  const [page, setPage] = useState<number>(0);
+  const [pageNumber, setPageNumber] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<Post[]>(initialPosts.data);
   const [hasNext, setHasNext] = useState<boolean>(initialPosts.next);
@@ -17,16 +17,12 @@ export default function Posts({ initialPosts }: PostsProps): JSX.Element {
 
   const loadMore = async () => {
     setIsLoading(true);
-
-    // TODO: it would be a good idea to load data inside getStaticProps
-    // for now just cache invalidation option is added inside fetch request
-    // described: https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-props
-    const postsData: PostsQueryResult = await PostService.query(page + 1);
+    const postsData: PostsQueryResult = await PostService.query(pageNumber + 1);
 
     if (!isResultError(postsData)) {
       setPosts([...posts, ...postsData.data]);
       setHasNext(postsData.next);
-      setPage(page + 1);
+      setPageNumber(pageNumber + 1);
       setIsLoading(false);
     } else {
       setError(postsData.error);
@@ -56,7 +52,7 @@ export default function Posts({ initialPosts }: PostsProps): JSX.Element {
           <button
             className="mx-auto py-2 px-3 bg-cyan-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none w-64 text-center"
             disabled={isLoading}
-            onClick={() => loadMore()}
+            onClick={loadMore}
           >
             {isLoading ? "Loading..." : "Load more"}
           </button>

@@ -5,13 +5,13 @@ const COMMENTS_URL: string = `http://localhost:8000/comments`;
 export default class CommentsService {
   static async query(postId: string): Promise<CommentsResult> {
     try {
-      const result = await fetch(COMMENTS_URL);
+      const result = await fetch(COMMENTS_URL, { cache: "no-store" });
       const data: Comment[] = await result.json();
 
       return {
-        data: data.filter(
-          (comment: Comment): boolean => comment.postId === postId
-        ),
+        data: data
+          .filter((comment: Comment): boolean => comment.postId === postId)
+          .reverse(), // later comments should be above
       };
     } catch (error: unknown) {
       return { error: error?.toString() || "Something went wrong" };

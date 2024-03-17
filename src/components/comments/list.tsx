@@ -10,6 +10,8 @@ type CommentsListProps = {
   postId: string;
 };
 
+// TODO: instead of two callbacks it might be a good idead to use state managment
+// but the page is too small and it really doesn't matter
 export default function CommentsList({
   data,
   postId,

@@ -1,4 +1,4 @@
-import { useRef, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState, ChangeEvent } from "react";
 import CommentsService from "@/src/api/comments";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -14,7 +14,7 @@ export default function CommentForm(props: {
   onSubmitCallback: () => void;
 }): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState<string>();
 
   const onSubmit = async (e: SyntheticEvent<CommentFormElement>) => {
     e.preventDefault();
@@ -22,11 +22,10 @@ export default function CommentForm(props: {
     try {
       await CommentsService.post({
         postId: props.postId,
-        text: e.currentTarget.elements.comment.value,
+        text: inputValue || "",
       });
-      if (inputRef.current) {
-        inputRef.current.value = "";
-      }
+
+      setInputValue("");
     } catch (err: unknown) {
       alert(err);
     } finally {
@@ -41,9 +40,12 @@ export default function CommentForm(props: {
         Comment:
       </label>
       <input
-        className="block text-sm p-4 font-medium leading-6 text-white bg-black border-white border-2 rounded-md"
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setInputValue(e.target.value)
+        }
+        className="block text-sm p-4 font-medium leading-6 dark:text-white dark:bg-black dark:border-white border-2 rounded-md"
         placeholder="Your comment"
-        ref={inputRef}
+        value={inputValue}
         type="text"
         id="comment"
         name="comment"
