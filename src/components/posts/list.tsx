@@ -36,7 +36,7 @@ export default function Posts({ initialPosts }: PostsProps): JSX.Element {
   // TODO: implement virtual scroll + cursor navigation
   return (
     <>
-      <section className="">
+      <section className="mb-8">
         <div className="flex flex-wrap">
           {posts &&
             posts.map(
@@ -48,7 +48,7 @@ export default function Posts({ initialPosts }: PostsProps): JSX.Element {
       </section>
 
       {hasNext && (
-        <nav className="flex">
+        <nav className="flex mb-8">
           <button
             className="mx-auto py-2 px-3 bg-cyan-500 text-white text-sm font-semibold rounded-md shadow focus:outline-none w-64 text-center"
             disabled={isLoading}

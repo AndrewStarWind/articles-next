@@ -13,7 +13,7 @@ export default function PostPage({ item }: PostPageProps): JSX.Element {
   // so i've just added priority=true here
   return (
     <>
-      <header className="w-full relative ">
+      <header className="w-full relative mb-8">
         <div className=" w-full">
           <h1 className="relative w-full mx-auto text-center p-12 md:p-32 z-10 text-2xl md:text-6xl font-bold">
             {item.title}
@@ -28,12 +28,12 @@ export default function PostPage({ item }: PostPageProps): JSX.Element {
         </div>
       </header>
       <main>
-        <div className="container mx-auto max-w-[1000px]">
-          <section className="content p-4 text-justify">{item.content}</section>
+        <div className="container mx-auto max-w-[1000px] mb-8">
+          <section className="content m-4 text-justify">{item.content}</section>
         </div>
         <hr />
         <section>
-          <div className="container mx-auto mt-8 max-w-[1000px]">
+          <div className="container mx-auto max-w-[1000px] mb-8">
             <CommentsList data={item.comments} postId={item.id} />
           </div>
         </section>
